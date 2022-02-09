@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/InahoAZ/task-app#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "~4.13.1",
     "mongoose": "^4.3.7"
   },
