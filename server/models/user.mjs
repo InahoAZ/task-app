@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 //Escribimos un middleware para encriptar los passwords antes de guardar cualquier usuario
-UserSchema.pre("save", (next) => {
+UserSchema.pre("save", function (next) {
     const user = this;
     //Si no hay ningun cambio en un pw existente no se hace nada pasando al siguiente middleware.
     if (!user.isModified("password")) {
@@ -33,6 +33,8 @@ UserSchema.pre("save", (next) => {
 });
 
 UserSchema.method.comparePassword = function (toCompare, done) {
+
+    console.log('ASDALKSJGLASKJ')
     bcrypt.compare(toCompare, this.password, (err, isMatch) => {
         if (err) done(err);
         else done(err, isMatch);

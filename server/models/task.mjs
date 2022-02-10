@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const TaskSchema = new mongoose.Schema({
     user: {
@@ -17,7 +17,5 @@ const TaskSchema = new mongoose.Schema({
     },
 });
 
-var string = "hola";
-string.toString()
 
 export default mongoose.model("Task", TaskSchema);

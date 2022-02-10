@@ -18,7 +18,10 @@
   "homepage": "https://github.com/InahoAZ/task-app#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
     "express": "~4.13.1",
+    "express-jwt": "^3.4.0",
+    "jsonwebtoken": "^7.4.3",
     "mongoose": "^4.3.7"
   },
   "devDependencies": {

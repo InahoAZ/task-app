@@ -1,7 +1,12 @@
-import express from 'express';
+import express from "express";
+import routes from "../server/routes/index.mjs";
+import bodyParser from "body-parser";
 
 const app = express();
 
-app.get('/', (req, res) => res.send('Hello, this is API and I\'m ok!'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-export default app
+app.use("/api", routes);
+
+export default app;
