@@ -32,9 +32,8 @@ UserSchema.pre("save", function (next) {
     });
 });
 
-UserSchema.method.comparePassword = function (toCompare, done) {
+UserSchema.methods.comparePassword = function (toCompare, done) {
 
-    console.log('ASDALKSJGLASKJ')
     bcrypt.compare(toCompare, this.password, (err, isMatch) => {
         if (err) done(err);
         else done(err, isMatch);

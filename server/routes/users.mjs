@@ -1,13 +1,14 @@
 import express from "express";
 import userCtrl from "../controllers/users.mjs";
 import user from "../models/user.mjs";
+import authenticate from "../../config/jwt.mjs";
 
 const router = express.Router();
 
 router
     .route("/")
     /** GET /api/users - Get a list of users */
-    .get(userCtrl.list)
+    .get(authenticate, userCtrl.list)
 
     /** POST /api/users - Create a new user */
     .post(userCtrl.create);

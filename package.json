@@ -21,6 +21,8 @@
     "body-parser": "^1.19.1",
     "express": "~4.13.1",
     "express-jwt": "^3.4.0",
+    "express-validation": "^0.4.5",
+    "joi": "^7.3.0",
     "jsonwebtoken": "^7.4.3",
     "mongoose": "^4.3.7"
   },
