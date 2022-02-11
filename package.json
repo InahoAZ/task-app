@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/InahoAZ/task-app#readme",
   "dependencies": {
+    "async": "^3.2.3",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.1",
     "express": "~4.13.1",
@@ -33,7 +34,7 @@
     "babel-preset-stage-2": "^6.5.0",
     "chai": "^3.5.0",
     "del": "^2.2.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-apidoc": "^0.2.4",
     "gulp-babel": "^6.1.2",
     "gulp-env": "^0.4.0",
