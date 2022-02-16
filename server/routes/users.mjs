@@ -13,7 +13,7 @@ router
     .get(userCtrl.list)
 
     /** POST /api/users - Create a new user */
-    .post(validate(validation.createUser), userCtrl.create);
+    .post(userCtrl.create);
 
 router
     .route("/:userId")

@@ -8,8 +8,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(authenticate);
+if(!process.env.NODE_ENV === 'test')
+    app.use(authenticate);
 app.use("/api", routes);
 
 app.use((err, req, res, next) => {

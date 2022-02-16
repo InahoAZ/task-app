@@ -14,11 +14,9 @@ if (config.env === "development") {
     mongoose.set("debug", true);
 }
 
-
-
 app.listen(config.default.port, () => {
     console.log(
-        `API Server started and listening on port ${config.default.port}`
+        `API Server started and listening on port ${config.default.port} with a ${process.env.NODE_ENV} environment`
     );
 });
 
