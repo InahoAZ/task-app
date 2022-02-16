@@ -11,6 +11,10 @@ const TaskSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    attached_file:{
+        data: Buffer,
+        contentType: String
+    },
     done: {
         type: Boolean,
         default: false,

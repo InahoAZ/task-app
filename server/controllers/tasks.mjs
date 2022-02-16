@@ -1,5 +1,8 @@
 import Task from "../models/task.mjs";
 
+
+
+
 function load(req, res, next, id) {
     Task.findById(id)
         .exec()
@@ -58,4 +61,16 @@ function remove(req, res, next) {
     );
 }
 
-export default { load, get, create, update, list, remove };
+function attachFile(req, res, next){
+    console.log('ALGO', req.file);
+    if(!req.file){
+        res.status(500);
+        return next(err);
+    }
+    //WIP: Parametrizar BASE_URL
+    res.json({fileUrl: `http://localhost:3001/images/attached_task/${req.file.filename}`})
+    
+    
+}
+
+export default { load, get, create, update, list, remove, attachFile };
