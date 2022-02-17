@@ -1,7 +1,7 @@
+import { filter } from "async";
 import Task from "../models/task.mjs";
-
-
-
+import { unlink } from "fs/promises";
+import path from "path";
 
 function load(req, res, next, id) {
     Task.findById(id)
@@ -61,16 +61,64 @@ function remove(req, res, next) {
     );
 }
 
-function attachFile(req, res, next){
-    console.log('ALGO', req.file);
-    if(!req.file){
+function attachFile(req, res, next) {
+    if (!req.file) {
         res.status(500);
         return next(err);
     }
+    const path_saved = {
+        filename: req.file.filename,
+        path: `http://localhost:3001/images/attached_task/${req.file.filename}`,
+    };
+    const task = req.dbTask;
+    task.attached_file = path_saved;
+
+    task.save().then(
+        () => res.sendStatus(204),
+        (e) => next(e)
+    );
+
     //WIP: Parametrizar BASE_URL
-    res.json({fileUrl: `http://localhost:3001/images/attached_task/${req.file.filename}`})
+    res.json({ fileUrl: path_saved });
+}
+
+function detachFile(req, res, next) {
+    const task = req.dbTask;
+
+    //Si no hay ningun archivo que desadjuntar
+    if(!task.toObject().attached_file){
+        return res.sendStatus(404);
+    }
     
+    //WIP: ver una manera mas elegante de manejar rutas
+    const static_path = path.resolve(
+        "server/public/images/attached_task",
+        task.attached_file.filename
+    );
+    console.log(static_path);
+    unlink(static_path)
+        .then((err) => {
+            console.log("successfully deleted ");
+        })
+        .catch((err) => {
+            next(err);
+        });
+
+    task.attached_file = null;
+    task.save().then(
+        () => res.sendStatus(204),
+        (e) => next(e)
+    );
     
 }
 
-export default { load, get, create, update, list, remove, attachFile };
+export default {
+    load,
+    get,
+    create,
+    update,
+    list,
+    remove,
+    attachFile,
+    detachFile,
+};

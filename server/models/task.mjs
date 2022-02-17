@@ -11,15 +11,15 @@ const TaskSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    attached_file:{
-        data: Buffer,
-        contentType: String
+    //WIP: Que se puedan adjuntar multiples archivos a una tarea.
+    attached_file: {
+        filename: String,
+        path: String
     },
     done: {
         type: Boolean,
         default: false,
     },
 });
-
 
 export default mongoose.model("Task", TaskSchema);

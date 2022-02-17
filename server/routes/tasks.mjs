@@ -4,6 +4,7 @@ import validate from "express-validation";
 import validation from "./validations/tasks.mjs";
 import multer from "multer";
 
+
 const router = express.Router();
 
 /**Manage Server Files Routes */
@@ -12,7 +13,6 @@ var storage = multer.diskStorage({
         cb(null, process.env.HOME + "/Documentos/Proyectos/task-app/server/public/images/attached_task");
     },
     filename: (req, file, cb) => {
-        console.log(file);
         var filetype = "";
         if (file.mimetype === "image/gif") {
             filetype = "gif";
@@ -50,7 +50,8 @@ router
     .delete(validate(validation.updateTask), taskCtrl.remove);
 
 /** Route for attach files to a task */
-router.post('/attachFile',upload.single('file'), taskCtrl.attachFile);
+router.route("/:taskId/attachFile").put(upload.single('file'), taskCtrl.attachFile);
+router.route("/:taskId/detachFile").put(taskCtrl.detachFile);
 /** Load task when API with taskId route parameter is hit */
 router.param("taskId", validate(validation.getTask));
 router.param("taskId", taskCtrl.load);
